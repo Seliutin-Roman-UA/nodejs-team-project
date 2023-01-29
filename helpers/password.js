@@ -13,11 +13,13 @@ const hashPassword = (password) =>
     });
   });
 
-const comparePassword = async (unhashedPassword, passwordFromDb) =>
-  new Promise((resolve, reject) => {
+const comparePasswords = (unhashedPassword, passwordFromDb) =>
+  {console.log("ndaskjfbvaksdjhbgkljsdBvl",passwordFromDb)
+  return new Promise((resolve, reject) => {
     const buf = Buffer.from(passwordFromDb, "base64");
     const salt = buf.subarray(0, 16);
     const hashedPassword = buf.subarray(16);
+
     crypto.scrypt(unhashedPassword, salt, 256, (err, hash) => {
       if (err) {
         reject(err);
@@ -25,9 +27,9 @@ const comparePassword = async (unhashedPassword, passwordFromDb) =>
       }
       resolve(crypto.timingSafeEqual(hashedPassword, hash));
     });
-  });
+  });}
 
 module.exports = {
-  hashPassword,
-  comparePassword,
-};
+    hashPassword,
+    comparePasswords,
+  }
