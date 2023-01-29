@@ -20,4 +20,8 @@ router.patch('/update', checkUser, userControl.updateUser);
 
 router.patch('/refresh', checkUser, userControl.refreshUser);
 
+router.post('/favorite/:id', checkUser, userControl.setFavoriteAds);
+
+router.delete('/favorite/:id', checkUser, userControl.removeFavoriteAds);
+
 module.exports = router;

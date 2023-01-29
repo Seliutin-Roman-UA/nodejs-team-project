@@ -1,6 +1,46 @@
 # pet-backend
 
 
+
+post   /api/users/signup                userRegistration         without Token
+
+get    /api/users/verify/:id/:code      verificateEmailToken     without Token
+
+get    /api/users/login                 userLogin                without Token
+
+get    /api/users/current               getInfoCurrentUser       need Token
+
+patch  /api/users/update                updateUser               need Token       
+
+patch  /api/users/refresh               refreshUser              need longToken
+
+post   /api/users/favorite/:id          setFavoriteAds           need Token (:id - adsId)
+
+delete /api/users/favorite/:id          removeFavoriteAds        need Token (:id - adsId)
+
+=========================================================
+
+get     /api/ads/                   getAllAds      without Token     
+        примеры localhost:3333/api/ads/
+                localhost:3333/api/ads/?categoryId=1
+                localhost:3333/api/ads/?categoryId=1&page=1&limit=4
+        в каждом случае будет работать
+
+get     /api/ads/my                 getMyAds        need Token
+
+get     /api/ads/ad/:id             getAdById       need Token
+
+post    /api/ads/add                addAd           need Token
+
+delete  /api/ads/remove/:id         removeAd        need Token
+
+patch   /api/ads/update/:id         updateAd        need Token
+
+get     /api/ads/search             НЕТ РЕШЕНИЯ     without Token
+
+
+
+
 Пользователь
 
 регистрация двухэтапная

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const newSchema = new mongoose.Schema({
+  _id: Number,
   tytle: {
     type: String,
     required: true,

@@ -30,7 +30,7 @@ async function addUserPet(req, res) {
   
   userPet.save(async (err, pet) => {    
     if (err) {
-      res.status(400).json({ "message": "Error occurred", "err": err });
+      res.status(500).json({ message: "Error occurred", "err": err });
       return;
     }
     res.json({
@@ -46,7 +46,7 @@ async function removeUserPet(req, res) {
   await UserPet.findOneAndDelete({_id, userId})
     .exec((err, pet) => {
         if (err) {
-          res.status(500).json({ message: "Error occured" });
+          res.status(500).json({ message: "Error occured", "err": err  });
           return;
         }
         res.json({
@@ -63,9 +63,8 @@ async function updateUserPet(req, res) {
   const prop = req.body;
   await UserPet.findOneAndUpdate({_id, userId}, { $set: { ...prop } }, {returnDocument: 'after'})
     .exec((err, pet) => {
-      console.log (pet, prop)
-      if (err) {
-        res.status(500).json({ message: "Error occured" });
+        if (err) {
+        res.status(500).json({ message: "Error occured", err: err});
         return;
       }
        res.json({

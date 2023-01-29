@@ -266,6 +266,39 @@ async function updateAvatar(req, res) {
     }    
 }
 
+async function setFavoriteAds(req, res) {
+    const _id = req.user.id; 
+    const adId = req.params.id;
+    const user = await User.findById(_id);
+    user.favoriteAds.push(Number(adId))
+    user.save(async (err, user) => {    
+    if (err) {
+      res.status(500).json({ message: "Error occurred", "err": err });
+      return;
+    }
+    res.json({
+      message: "Favorite ad added",
+      data: user,         
+    });                 
+  });
+}
+async function removeFavoriteAds(req, res) {
+    const _id = req.user.id; 
+    const adId = req.params.id;
+    const user = await User.findById(_id);
+    user.favoriteAds.splice(user.favoriteAds.indexOf(adId), 1);    
+    user.save(async (err, user) => {    
+    if (err) {
+      res.status(500).json({ message: "Error occurred", "err": err });
+      return;
+    }
+    res.json({
+      message: "Favorite ad added",
+      data: user,         
+    });                 
+  });
+}
+
 module.exports = {
     userRegistration,
     verificateEmailToken,
@@ -273,5 +306,7 @@ module.exports = {
     getInfoCurrentUser,
     updateUser,
     refreshUser,
-    updateAvatar,  
+    updateAvatar,
+    setFavoriteAds,
+    removeFavoriteAds,
 };

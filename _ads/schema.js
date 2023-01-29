@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const adSchema = new mongoose.Schema({
   _id: Number,
-  category: Number,
+  categoryId: Number,
   imgURL: String,
   userId: {
     type: String,
@@ -14,7 +14,7 @@ const adSchema = new mongoose.Schema({
   breed: String,
   sex: {
     type: String,
-    enum: ['male', 'femail']
+    enum: ['male', 'female']
   },
   location: String,
   price: {

@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  _id: Number,
+  _id: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
   avatarURL: {
       type: String,
       default: '',
@@ -24,6 +28,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'City is required'],
   }, 
   phone: String,
+  favoriteAds: [Number],
   longToken:  {
       type: String,
       default: '',
